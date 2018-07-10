@@ -9,13 +9,14 @@ import (
 func TestIDNum(t *testing.T) {
 	testID := "420683199006041237"
 	detail, err := IDCard(testID).Decode()
+	t.Log(detail)
 	if err != nil {
 		t.Error("Valid id parse failed.")
 	}
 	if detail.Province != "湖北省" {
 		t.Error("Province check failed")
 	}
-	if detail.City != "枣阳市" {
+	if detail.City != "襄阳市" {
 		t.Error("City check failed")
 	}
 	birth, err := time.Parse("20060102", "19900604")

@@ -124,6 +124,7 @@ type Addr struct {
 	CityCode int    `json:"cityCode"`
 	Province string `json:"province"`
 	City     string `json:"city"`
+	District string `json:"district"` // 区/县
 }
 
 // InitAddr 初始化地址信息
@@ -131,7 +132,10 @@ func (addr *Addr) InitAddr(code int) {
 	addr.CityCode = code
 	addr.City = "未知"
 	addr.Province = "未知"
-	if city, ex := cityMap[code]; ex {
+	if district, ex := cityMap[code]; ex {
+		addr.District = district
+	}
+	if city, ex := cityMap[code-code%100]; ex {
 		addr.City = city
 	}
 	if prov, ex := cityMap[code-code%10000]; ex {
